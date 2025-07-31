@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductApplicationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductFeatureController;
 use App\Http\Controllers\ProductImageController;
@@ -38,6 +40,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/products/{product}/features', [ProductFeatureController::class, 'index'])->name('product-features.index');
         Route::post('/product-features', [ProductFeatureController::class, 'store'])->name('product-features.store');
         Route::delete('/product-features', [ProductFeatureController::class, 'destroy'])->name('product-features.destroy');
+
+        Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+        Route::put('/applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
+        Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+
+        Route::get('/products/{product}/applications', [ProductApplicationController::class, 'index'])->name('product-applications.index');
+        Route::post('/product-applications', [ProductApplicationController::class, 'update'])->name('product-applications.update');
     });
 
     Route::middleware('role:customer')->group(function () {

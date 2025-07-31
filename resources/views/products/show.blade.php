@@ -57,24 +57,24 @@
     //     (object) ['id' => 6, 'product_id' => 1, 'feature' => 'Sạc nhanh ExpressCharge'],
     // ];
 
-    $applications = [
-        (object) [
-            'id' => 1,
-            'name' => 'Lập trình phần mềm',
-            'description' => 'Phù hợp cho các IDE và framework hiện đại',
-        ],
-        (object) [
-            'id' => 2,
-            'name' => 'Thiết kế đồ họa',
-            'description' => 'Hỗ trợ Adobe Creative Suite và các phần mềm thiết kế',
-        ],
-        (object) [
-            'id' => 3,
-            'name' => 'Doanh nghiệp',
-            'description' => 'Công việc văn phòng, thuyết trình chuyên nghiệp',
-        ],
-        (object) ['id' => 4, 'name' => 'Học tập', 'description' => 'Phù hợp cho sinh viên và nghiên cứu'],
-    ];
+    // $applications = [
+    //     (object) [
+    //         'id' => 1,
+    //         'name' => 'Lập trình phần mềm',
+    //         'description' => 'Phù hợp cho các IDE và framework hiện đại',
+    //     ],
+    //     (object) [
+    //         'id' => 2,
+    //         'name' => 'Thiết kế đồ họa',
+    //         'description' => 'Hỗ trợ Adobe Creative Suite và các phần mềm thiết kế',
+    //     ],
+    //     (object) [
+    //         'id' => 3,
+    //         'name' => 'Doanh nghiệp',
+    //         'description' => 'Công việc văn phòng, thuyết trình chuyên nghiệp',
+    //     ],
+    //     (object) ['id' => 4, 'name' => 'Học tập', 'description' => 'Phù hợp cho sinh viên và nghiên cứu'],
+    // ];
 
     $rams = [
         (object) ['id' => 1, 'size' => '8GB'],
@@ -291,12 +291,13 @@
                     <h2 class="text-xl font-bold text-gray-800">
                         <i class="fas fa-rocket text-red-500 mr-2"></i>Ứng dụng phù hợp
                     </h2>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                    <a href="{{ route('product-applications.index', $product) }}"
+                        class="text-blue-600 hover:text-blue-800 font-medium">
                         <i class="fas fa-edit mr-1"></i>Chỉnh sửa
                     </a>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @foreach ($applications as $app)
+                    @foreach ($product->applications as $app)
                         <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                             <h3 class="font-medium text-gray-800 mb-2">{{ $app->name }}</h3>
                             <p class="text-sm text-gray-600">{{ $app->description }}</p>
