@@ -19,4 +19,9 @@ class Product extends Model
         'ports',
         'is_active',
     ];
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 }

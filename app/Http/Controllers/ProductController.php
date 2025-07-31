@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Product;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,9 +12,16 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+
+        $products = Product::when($search, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('slug', 'like', '%' . $search . '%');
+        })->latest()->paginate(10);
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -20,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
+        return view('products.create', compact('brands'));
     }
 
     /**
@@ -41,6 +51,10 @@ class ProductController extends Controller
             'ports' => 'nullable|string|max:255',
             'is_active' => 'boolean',
         ];
+        $validated = $request->validate($rules);
+
+        Product::create($validated);
+        return redirect()->route('products.index')->with('success', 'Sản phẩm đã được tạo thành công.');
     }
 
     /**
@@ -56,7 +70,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $brands = Brand::all();
+        return view('products.edit', compact('product', 'brands'));
     }
 
     /**
@@ -77,6 +92,10 @@ class ProductController extends Controller
             'ports' => 'nullable|string|max:255',
             'is_active' => 'boolean',
         ];
+        $validated = $request->validate($rules);
+
+        $product->update($validated);
+        return redirect()->route('products.index')->with('success', 'Sản phẩm đã được cập nhật thành công.');
     }
 
     /**
@@ -84,6 +103,24 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            $product->delete();
+
+            session()->flash('success', 'Sản phẩm đã được xoá thành công.');
+
+            return response()->json([
+                'status' => true,
+            ], 200);
+        } catch (QueryException $e) {
+            $msg = $e->getCode() === '23000'
+                ? 'Không thể xoá sản phẩm vì đang được liên kết với dữ liệu khác.'
+                : 'Đã xảy ra lỗi khi xoá: ' . $e->getMessage();
+
+            session()->flash('error', $msg);
+
+            return response()->json([
+                'status' => false,
+            ], 500);
+        }
     }
 }

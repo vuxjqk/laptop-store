@@ -1,29 +1,29 @@
 @php
     // Dữ liệu mẫu cho demo
-    $brand = (object) [
-        'id' => 1,
-        'name' => 'Dell',
-        'slug' => 'dell',
-        'description' => 'Thương hiệu máy tính hàng đầu thế giới',
-        'logo' => 'https://via.placeholder.com/100x50/007DB8/FFFFFF?text=Dell',
-        'is_active' => true,
-    ];
+    // $brand = (object) [
+    //     'id' => 1,
+    //     'name' => 'Dell',
+    //     'slug' => 'dell',
+    //     'description' => 'Thương hiệu máy tính hàng đầu thế giới',
+    //     'logo' => 'https://via.placeholder.com/100x50/007DB8/FFFFFF?text=Dell',
+    //     'is_active' => true,
+    // ];
 
-    $product = (object) [
-        'id' => 1,
-        'name' => 'Dell XPS 13 Plus',
-        'slug' => 'dell-xps-13-plus',
-        'brand_id' => 1,
-        'description' =>
-            'Laptop cao cấp với thiết kế siêu mỏng, hiệu năng mạnh mẽ và màn hình InfinityEdge đẹp mắt. Phù hợp cho công việc chuyên nghiệp và sáng tạo.',
-        'processor' => 'Intel Core i7-1260P (12 cores, 16 threads, up to 4.7GHz)',
-        'display' => '13.4" OLED 3.5K (3456x2160) Touch Display, 400 nits',
-        'graphics' => 'Intel Iris Xe Graphics',
-        'battery' => '55Wh, up to 12 hours',
-        'weight' => '1.26kg',
-        'ports' => '2x Thunderbolt 4, 1x 3.5mm headphone jack',
-        'is_active' => true,
-    ];
+    // $product = (object) [
+    //     'id' => 1,
+    //     'name' => 'Dell XPS 13 Plus',
+    //     'slug' => 'dell-xps-13-plus',
+    //     'brand_id' => 1,
+    //     'description' =>
+    //         'Laptop cao cấp với thiết kế siêu mỏng, hiệu năng mạnh mẽ và màn hình InfinityEdge đẹp mắt. Phù hợp cho công việc chuyên nghiệp và sáng tạo.',
+    //     'processor' => 'Intel Core i7-1260P (12 cores, 16 threads, up to 4.7GHz)',
+    //     'display' => '13.4" OLED 3.5K (3456x2160) Touch Display, 400 nits',
+    //     'graphics' => 'Intel Iris Xe Graphics',
+    //     'battery' => '55Wh, up to 12 hours',
+    //     'weight' => '1.26kg',
+    //     'ports' => '2x Thunderbolt 4, 1x 3.5mm headphone jack',
+    //     'is_active' => true,
+    // ];
 
     $product_images = [
         (object) [
@@ -145,16 +145,17 @@
 
 @extends('layouts.admin')
 
-@section('title', 'Sản phẩm')
+@section('title', $product->name)
 
 @section('content')
     <!-- Breadcrumb -->
     <div class="mb-6">
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="flex items-center space-x-2">
-                <li><a href="#" class="text-blue-600 hover:text-blue-800"><i class="fas fa-home"></i></a></li>
+                <li><a href="{{ route('dashboard') }}" class="text-blue-600 hover:text-blue-800"><i
+                            class="fas fa-home"></i></a></li>
                 <li><i class="fas fa-chevron-right text-gray-400"></i></li>
-                <li><a href="#" class="text-blue-600 hover:text-blue-800">Sản phẩm</a></li>
+                <li><a href="{{ route('products.index') }}" class="text-blue-600 hover:text-blue-800">Sản phẩm</a></li>
                 <li><i class="fas fa-chevron-right text-gray-400"></i></li>
                 <li class="text-gray-500">{{ $product->name }}</li>
             </ol>
@@ -165,10 +166,11 @@
     <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-4">
-                <img src="{{ $brand->logo }}" alt="{{ $brand->name }}" class="h-12">
+                <img src="{{ asset('storage/' . $product->brand->logo) }}" alt="{{ $product->brand->name }}" class="h-12">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-800">{{ $product->name }}</h1>
-                    <p class="text-gray-600">Thương hiệu: <span class="font-medium text-blue-600">{{ $brand->name }}</span>
+                    <p class="text-gray-600">Thương hiệu: <span
+                            class="font-medium text-blue-600">{{ $product->brand->name }}</span>
                     </p>
                 </div>
             </div>
