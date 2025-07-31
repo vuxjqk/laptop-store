@@ -48,14 +48,14 @@
     //     ],
     // ];
 
-    $product_features = [
-        (object) ['id' => 1, 'product_id' => 1, 'feature' => 'Màn hình OLED 3.5K siêu nét'],
-        (object) ['id' => 2, 'product_id' => 1, 'feature' => 'Bàn phím backlit LED'],
-        (object) ['id' => 3, 'product_id' => 1, 'feature' => 'Webcam Full HD với Windows Hello'],
-        (object) ['id' => 4, 'product_id' => 1, 'feature' => 'Audio Waves MaxxAudio Pro'],
-        (object) ['id' => 5, 'product_id' => 1, 'feature' => 'Thiết kế carbon fiber cao cấp'],
-        (object) ['id' => 6, 'product_id' => 1, 'feature' => 'Sạc nhanh ExpressCharge'],
-    ];
+    // $product_features = [
+    //     (object) ['id' => 1, 'product_id' => 1, 'feature' => 'Màn hình OLED 3.5K siêu nét'],
+    //     (object) ['id' => 2, 'product_id' => 1, 'feature' => 'Bàn phím backlit LED'],
+    //     (object) ['id' => 3, 'product_id' => 1, 'feature' => 'Webcam Full HD với Windows Hello'],
+    //     (object) ['id' => 4, 'product_id' => 1, 'feature' => 'Audio Waves MaxxAudio Pro'],
+    //     (object) ['id' => 5, 'product_id' => 1, 'feature' => 'Thiết kế carbon fiber cao cấp'],
+    //     (object) ['id' => 6, 'product_id' => 1, 'feature' => 'Sạc nhanh ExpressCharge'],
+    // ];
 
     $applications = [
         (object) [
@@ -270,12 +270,13 @@
                     <h2 class="text-xl font-bold text-gray-800">
                         <i class="fas fa-star text-yellow-500 mr-2"></i>Tính năng nổi bật
                     </h2>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                    <a href="{{ route('product-features.index', $product) }}"
+                        class="text-blue-600 hover:text-blue-800 font-medium">
                         <i class="fas fa-edit mr-1"></i>Chỉnh sửa
                     </a>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    @foreach ($product_features as $feature)
+                    @foreach ($product->features as $feature)
                         <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                             <i class="fas fa-check-circle text-blue-600"></i>
                             <span class="text-gray-700">{{ $feature->feature }}</span>

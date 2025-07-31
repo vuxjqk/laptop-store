@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductFeature;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductFeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Product $product)
     {
-        //
+        $features = $product->features;
+        return view('product-features.index', compact('product', 'features'));
     }
 
     /**
@@ -32,6 +35,23 @@ class ProductFeatureController extends Controller
             'product_id' => 'required|exists:products,id',
             'feature' => 'required|string|max:255',
         ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        ProductFeature::create($validator->validated());
+
+        session()->flash('success', 'Tính năng sản phẩm đã được tạo thành công.');
+
+        return response()->json([
+            'status' => true,
+        ], 200);
     }
 
     /**
@@ -64,8 +84,23 @@ class ProductFeatureController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductFeature $productFeature)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate([
+            'feature_ids' => 'required|array',
+            'feature_ids.*' => 'exists:product_features,id',
+        ]);
+
+        $features = Productfeature::whereIn('id', $request->feature_ids)->get();
+
+        foreach ($features as $feature) {
+            $feature->delete();
+        }
+
+        session()->flash('success', 'Tính năng sản phẩm đã được xoá thành công.');
+
+        return response()->json([
+            'status' => true,
+        ], 200);
     }
 }
