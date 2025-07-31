@@ -25,28 +25,28 @@
     //     'is_active' => true,
     // ];
 
-    $product_images = [
-        (object) [
-            'id' => 1,
-            'product_id' => 1,
-            'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Main',
-        ],
-        (object) [
-            'id' => 2,
-            'product_id' => 1,
-            'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Side',
-        ],
-        (object) [
-            'id' => 3,
-            'product_id' => 1,
-            'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Open',
-        ],
-        (object) [
-            'id' => 4,
-            'product_id' => 1,
-            'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Back',
-        ],
-    ];
+    // $product_images = [
+    //     (object) [
+    //         'id' => 1,
+    //         'product_id' => 1,
+    //         'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Main',
+    //     ],
+    //     (object) [
+    //         'id' => 2,
+    //         'product_id' => 1,
+    //         'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Side',
+    //     ],
+    //     (object) [
+    //         'id' => 3,
+    //         'product_id' => 1,
+    //         'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Open',
+    //     ],
+    //     (object) [
+    //         'id' => 4,
+    //         'product_id' => 1,
+    //         'path' => 'https://via.placeholder.com/800x600/F5F5F5/333333?text=Dell+XPS+13+Back',
+    //     ],
+    // ];
 
     $product_features = [
         (object) ['id' => 1, 'product_id' => 1, 'feature' => 'Màn hình OLED 3.5K siêu nét'],
@@ -194,14 +194,15 @@
                     <h2 class="text-xl font-bold text-gray-800">
                         <i class="fas fa-images text-purple-600 mr-2"></i>Hình ảnh sản phẩm
                     </h2>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                    <a href="{{ route('product-images.index', $product) }}"
+                        class="text-blue-600 hover:text-blue-800 font-medium">
                         <i class="fas fa-edit mr-1"></i>Chỉnh sửa
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    @foreach ($product_images as $image)
+                    @foreach ($product->images as $image)
                         <div class="aspect-video bg-gray-100 rounded-lg overflow-hidden">
-                            <img src="{{ $image->path }}" alt="Product Image"
+                            <img src="{{ asset('storage/' . $image->path) }}" alt="Product Image"
                                 class="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer">
                         </div>
                     @endforeach
