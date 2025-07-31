@@ -39,4 +39,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Application::class, 'product_applications');
     }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
 }

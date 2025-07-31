@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductApplicationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductFeatureController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/products/{product}/applications', [ProductApplicationController::class, 'index'])->name('product-applications.index');
         Route::post('/product-applications', [ProductApplicationController::class, 'update'])->name('product-applications.update');
+
+        Route::get('/products/{product}/variants', [ProductVariantController::class, 'index'])->name('product-variants.index');
+        Route::post('/product-variants', [ProductVariantController::class, 'store'])->name('product-variants.store');
+        Route::patch('/product-variants/{productVariant}', [ProductVariantController::class, 'update'])->name('product-variants.update');
+        Route::delete('/product-variants', [ProductVariantController::class, 'destroy'])->name('product-variants.destroy');
     });
 
     Route::middleware('role:customer')->group(function () {

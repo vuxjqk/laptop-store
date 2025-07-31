@@ -66,7 +66,8 @@
                     <div class="mb-4">
                         <label for="images" class="block text-sm font-medium text-gray-700">Chọn hình ảnh</label>
                         <input type="file" name="images[]" id="images" multiple accept="image/*"
-                            class="mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            required>
 
                         <p id="error-images" class="text-red-500 text-sm mt-1"></p>
                         <p id="error-images-dot" class="text-red-500 text-sm mt-1"></p>

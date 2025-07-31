@@ -63,7 +63,7 @@
                 </li>
                 <li>
                     <a href="{{ route('products.index') }}"
-                        class="{{ request()->routeIs('products.*', 'product-images.*', 'product-features.*', 'product-applications.*') ? 'active' : 'inactive' }}">
+                        class="{{ request()->routeIs('products.*', 'product-images.*', 'product-features.*', 'product-applications.*', 'product-variants.*') ? 'active' : 'inactive' }}">
                         <i class="fas fa-laptop"></i>
                         <span>Sản phẩm</span>
                     </a>

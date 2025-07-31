@@ -76,71 +76,71 @@
     //     (object) ['id' => 4, 'name' => 'Học tập', 'description' => 'Phù hợp cho sinh viên và nghiên cứu'],
     // ];
 
-    $rams = [
-        (object) ['id' => 1, 'size' => '8GB'],
-        (object) ['id' => 2, 'size' => '16GB'],
-        (object) ['id' => 3, 'size' => '32GB'],
-    ];
+    // $rams = [
+    //     (object) ['id' => 1, 'size' => '8GB'],
+    //     (object) ['id' => 2, 'size' => '16GB'],
+    //     (object) ['id' => 3, 'size' => '32GB'],
+    // ];
 
-    $storages = [
-        (object) ['id' => 1, 'capacity' => '256GB SSD'],
-        (object) ['id' => 2, 'capacity' => '512GB SSD'],
-        (object) ['id' => 3, 'capacity' => '1TB SSD'],
-    ];
+    // $storages = [
+    //     (object) ['id' => 1, 'capacity' => '256GB SSD'],
+    //     (object) ['id' => 2, 'capacity' => '512GB SSD'],
+    //     (object) ['id' => 3, 'capacity' => '1TB SSD'],
+    // ];
 
-    $colors = [
-        (object) ['id' => 1, 'name' => 'Platinum Silver', 'hex_code' => '#E5E4E2'],
-        (object) ['id' => 2, 'name' => 'Graphite', 'hex_code' => '#41424C'],
-        (object) ['id' => 3, 'name' => 'Sky Blue', 'hex_code' => '#87CEEB'],
-    ];
+    // $colors = [
+    //     (object) ['id' => 1, 'name' => 'Platinum Silver', 'hex_code' => '#E5E4E2'],
+    //     (object) ['id' => 2, 'name' => 'Graphite', 'hex_code' => '#41424C'],
+    //     (object) ['id' => 3, 'name' => 'Sky Blue', 'hex_code' => '#87CEEB'],
+    // ];
 
-    $product_variants = [
-        (object) [
-            'id' => 1,
-            'ram_id' => 1,
-            'storage_id' => 1,
-            'color_id' => 1,
-            'price' => 25990000,
-            'original_price' => 28990000,
-            'stock_quantity' => 15,
-        ],
-        (object) [
-            'id' => 2,
-            'ram_id' => 1,
-            'storage_id' => 1,
-            'color_id' => 2,
-            'price' => 25990000,
-            'original_price' => 28990000,
-            'stock_quantity' => 8,
-        ],
-        (object) [
-            'id' => 3,
-            'ram_id' => 2,
-            'storage_id' => 2,
-            'color_id' => 1,
-            'price' => 32990000,
-            'original_price' => 35990000,
-            'stock_quantity' => 12,
-        ],
-        (object) [
-            'id' => 4,
-            'ram_id' => 2,
-            'storage_id' => 2,
-            'color_id' => 2,
-            'price' => 32990000,
-            'original_price' => 35990000,
-            'stock_quantity' => 6,
-        ],
-        (object) [
-            'id' => 5,
-            'ram_id' => 3,
-            'storage_id' => 3,
-            'color_id' => 3,
-            'price' => 45990000,
-            'original_price' => 49990000,
-            'stock_quantity' => 3,
-        ],
-    ];
+    // $product_variants = [
+    //     (object) [
+    //         'id' => 1,
+    //         'ram_id' => 1,
+    //         'storage_id' => 1,
+    //         'color_id' => 1,
+    //         'price' => 25990000,
+    //         'original_price' => 28990000,
+    //         'stock_quantity' => 15,
+    //     ],
+    //     (object) [
+    //         'id' => 2,
+    //         'ram_id' => 1,
+    //         'storage_id' => 1,
+    //         'color_id' => 2,
+    //         'price' => 25990000,
+    //         'original_price' => 28990000,
+    //         'stock_quantity' => 8,
+    //     ],
+    //     (object) [
+    //         'id' => 3,
+    //         'ram_id' => 2,
+    //         'storage_id' => 2,
+    //         'color_id' => 1,
+    //         'price' => 32990000,
+    //         'original_price' => 35990000,
+    //         'stock_quantity' => 12,
+    //     ],
+    //     (object) [
+    //         'id' => 4,
+    //         'ram_id' => 2,
+    //         'storage_id' => 2,
+    //         'color_id' => 2,
+    //         'price' => 32990000,
+    //         'original_price' => 35990000,
+    //         'stock_quantity' => 6,
+    //     ],
+    //     (object) [
+    //         'id' => 5,
+    //         'ram_id' => 3,
+    //         'storage_id' => 3,
+    //         'color_id' => 3,
+    //         'price' => 45990000,
+    //         'original_price' => 49990000,
+    //         'stock_quantity' => 3,
+    //     ],
+    // ];
 @endphp
 
 @extends('layouts.admin')
@@ -323,16 +323,17 @@
                     <h2 class="text-xl font-bold text-gray-800">
                         <i class="fas fa-palette text-purple-600 mr-2"></i>Phiên bản sản phẩm
                     </h2>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                    <a href="{{ route('product-variants.index', $product) }}"
+                        class="text-blue-600 hover:text-blue-800 font-medium">
                         <i class="fas fa-edit mr-1"></i>Chỉnh sửa
                     </a>
                 </div>
                 <div class="space-y-4">
-                    @foreach ($product_variants as $variant)
+                    @foreach ($product->variants as $variant)
                         @php
-                            $ram = collect($rams)->firstWhere('id', $variant->ram_id);
-                            $storage = collect($storages)->firstWhere('id', $variant->storage_id);
-                            $color = collect($colors)->firstWhere('id', $variant->color_id);
+                            $ram = $variant->ram;
+                            $storage = $variant->storage;
+                            $color = $variant->color;
                         @endphp
                         <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
                             <div class="flex items-center justify-between mb-3">

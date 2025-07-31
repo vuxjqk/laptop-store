@@ -115,7 +115,7 @@
         </div>
 
         <!-- Add Application Modal -->
-        <div id="addModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+        <div id="addModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Thêm ứng dụng mới</h2>
                 <form id="addApplicationForm" method="POST" action="{{ route('applications.store') }}">
@@ -144,7 +144,7 @@
         </div>
 
         <!-- Edit Application Modal -->
-        <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+        <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Chỉnh sửa ứng dụng</h2>
                 <form id="editApplicationForm" method="POST" action="">
@@ -175,7 +175,8 @@
         </div>
 
         <!-- Delete Confirmation Modal -->
-        <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+        <div id="deleteModal"
+            class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Xác nhận xoá</h2>
                 <p class="text-gray-600 mb-6">Bạn có chắc chắn muốn xoá ứng dụng này? Hành động này không thể hoàn tác.</p>
@@ -189,7 +190,8 @@
         </div>
 
         <!-- Confirm Selected Modal -->
-        <div id="confirmModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+        <div id="confirmModal"
+            class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Xác nhận cập nhật</h2>
                 <p class="text-gray-600 mb-6">Bạn có chắc chắn muốn cập nhật danh sách ứng dụng cho sản phẩm này?</p>
