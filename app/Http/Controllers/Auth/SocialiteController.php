@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -18,6 +20,19 @@ class SocialiteController extends Controller
     {
         $socialUser = Socialite::driver($provider)->user();
 
+        $path = null;
+        if ($socialUser->getAvatar()) {
+            $response = Http::get($socialUser->getAvatar());
+
+            if ($response->successful()) {
+                $extension = pathinfo($socialUser->getAvatar(), PATHINFO_EXTENSION);
+                $filename = 'avatar_' . $socialUser->getId() . '_' . time() . '.' . ($extension ?: 'jpg');
+
+                Storage::disk('public')->put('avatars/' . $filename, $response->body());
+                $path = 'avatars/' . $filename;
+            }
+        }
+
         $user = User::updateOrCreate(
             [
                 'provider' => $provider,
@@ -25,7 +40,7 @@ class SocialiteController extends Controller
             ],
             [
                 'name' => $socialUser->getName(),
-                'avatar' => $socialUser->getAvatar(),
+                'avatar' => $path,
                 'email_verified_at' => now(),
             ]
         );

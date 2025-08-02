@@ -11,10 +11,6 @@
     --sidebar-width: 280px;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-}
-
 .active {
     @apply flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 text-white font-medium shadow-lg;
 }
@@ -199,19 +195,17 @@ body {
 }
 
 /* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .glass-effect {
-        background: rgba(15, 23, 42, 0.9);
-    }
+.dark .glass-effect {
+    background: rgba(15, 23, 42, 0.9);
+}
 
-    .sidebar {
-        background: #0f172a;
-        border-right: 1px solid #334155;
-    }
+.dark .sidebar {
+    background: #0f172a;
+    border-right: 1px solid #334155;
+}
 
-    .toast {
-        backdrop-filter: blur(10px);
-    }
+.dark .toast {
+    backdrop-filter: blur(10px);
 }
 
 /* Smooth scrollbar */

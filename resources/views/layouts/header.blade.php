@@ -6,7 +6,7 @@
                 <i class="fas fa-laptop text-lg text-white"></i>
             </div>
             <div class="hidden sm:block">
-                <h1 class="text-xl font-bold text-slate-100">LaptopStore</h1>
+                <h1 class="text-xl font-bold text-slate-800 dark:text-slate-200">LaptopStore</h1>
                 <p class="text-xs text-slate-500 font-medium">Admin Dashboard</p>
             </div>
         </div>
@@ -86,11 +86,17 @@
                 <button id="userMenuBtn"
                     class="flex items-center space-x-3 px-3 py-2 rounded-xl hover:bg-white/70 transition-all duration-200 cursor-pointer">
                     <div class="w-9 h-9 rounded-full gradient-bg flex items-center justify-center shadow-md">
-                        <span class="text-white font-semibold text-sm">A</span>
+                        @if (Auth::user()->avatar)
+                            <img class="rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                                src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar">
+                        @else
+                            <span
+                                class="text-white font-semibold text-sm">{{ ucfirst(substr(Auth::user()->name, 0, 1)) }}</span>
+                        @endif
                     </div>
                     <div class="hidden lg:block text-left">
-                        <p class="text-sm font-semibold text-slate-500">Admin User</p>
-                        <p class="text-xs text-slate-500">Super Admin</p>
+                        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">{{ Auth::user()->name }}</p>
+                        <p class="text-xs text-slate-500">{{ Auth::user()->role }}</p>
                     </div>
                     <i class="fas fa-chevron-down text-slate-400 text-xs transition-transform duration-200"
                         id="userChevron"></i>
@@ -102,16 +108,22 @@
                     <div class="p-4 border-b border-slate-100">
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shadow-md">
-                                <span class="text-white font-semibold">A</span>
+                                @if (Auth::user()->avatar)
+                                    <img class="rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                                        src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar">
+                                @else
+                                    <span
+                                        class="text-white font-semibold">{{ ucfirst(substr(Auth::user()->name, 0, 1)) }}</span>
+                                @endif
                             </div>
                             <div>
-                                <p class="font-semibold text-slate-800">Admin User</p>
-                                <p class="text-sm text-slate-500">admin@laptopstore.com</p>
+                                <p class="font-semibold text-slate-800">{{ Auth::user()->name }}</p>
+                                <p class="text-sm text-slate-500">{{ Auth::user()->email }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="py-2">
-                        <a href="#"
+                        <a href="{{ route('profile.edit') }}"
                             class="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 transition-colors">
                             <i class="fas fa-user text-slate-400 w-4"></i>
                             <span class="text-sm text-slate-700">Hồ sơ cá nhân</span>
@@ -126,13 +138,15 @@
                             <i class="fas fa-question-circle text-slate-400 w-4"></i>
                             <span class="text-sm text-slate-700">Trợ giúp</span>
                         </a>
-                        <div class="border-t border-slate-100 mt-2 pt-2">
-                            <a href="#"
+                        <form method="POST" action="{{ route('logout') }}" class="border-t border-slate-100 mt-2 pt-2">
+                            @csrf
+
+                            <button type="submit"
                                 class="flex items-center space-x-3 px-4 py-3 hover:bg-red-50 transition-colors text-red-600">
                                 <i class="fas fa-sign-out-alt w-4"></i>
                                 <span class="text-sm font-medium">Đăng xuất</span>
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

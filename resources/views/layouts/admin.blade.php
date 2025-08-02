@@ -50,7 +50,7 @@
     </main>
 
     <!-- Scripts -->
-    @vite(['resources/js/AdminLayoutExtended.js'])
+    @vite(['resources/js/admin.js'])
     @stack('scripts')
     <script>
         window.sessionMessages = {

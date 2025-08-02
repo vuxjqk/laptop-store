@@ -7,7 +7,7 @@
                     <i class="fas fa-laptop text-lg text-white"></i>
                 </div>
                 <div class="hidden sm:block">
-                    <h1 class="text-xl font-bold text-slate-100">LaptopStore</h1>
+                    <h1 class="text-xl font-bold text-slate-800 dark:text-slate-200">LaptopStore</h1>
                     <p class="text-xs text-slate-500 font-medium">Admin Dashboard</p>
                 </div>
             </div>
